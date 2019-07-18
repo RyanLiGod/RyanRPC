@@ -55,21 +55,22 @@ public class Server {
                 System.out.println("Server 等待接受...");
                 String className = objectInputStream.readUTF();
                 String methodName = objectInputStream.readUTF();
-                Class<?>[] parameterTypes = (Class<?>[]) objectInputStream.readObject();
+                Class[] parameterTypes = (Class[]) objectInputStream.readObject();
                 Object[] arguments = (Object[]) objectInputStream.readObject();
 
                 // 根据名字把实现接口的方法类返回回去
                 System.out.println("Server 收到" + className);
                 Class serverClass = serviceRegistry.get(className);
                 Method method = serverClass.getMethod(methodName, parameterTypes);
-                Object result = method.invoke(serverClass.newInstance(), arguments);
+                Object result = method.invoke(serverClass.getDeclaredConstructor().newInstance(), arguments);
                 // 给client的响应
                 System.out.println("Server 回应消息...");
                 objectOutputStream = new ObjectOutputStream(client.getOutputStream());
                 objectOutputStream.writeObject(result);
+                System.out.println("Server 回应完毕");
 
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             } finally {
                 if (objectOutputStream != null) {
                     try {

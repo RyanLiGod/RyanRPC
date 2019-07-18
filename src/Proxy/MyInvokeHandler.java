@@ -11,11 +11,11 @@ import java.net.Socket;
  * @author Ryan Li
  * @date 2019/07/18
  */
-public class MyInvokeHandler implements InvocationHandler{
+public class MyInvokeHandler implements InvocationHandler {
 
-    private Class target ;
+    private Class target;
 
-    public MyInvokeHandler (Class target){
+    public MyInvokeHandler(Class target) {
         this.target = target;
     }
 
@@ -25,7 +25,7 @@ public class MyInvokeHandler implements InvocationHandler{
         ObjectOutputStream output = null;
         ObjectInputStream input = null;
         Socket socket = null;
-        try{
+        try {
             socket = new Socket();
             socket.connect(new InetSocketAddress("localhost", 8088));
             output = new ObjectOutputStream(socket.getOutputStream());
@@ -37,15 +37,14 @@ public class MyInvokeHandler implements InvocationHandler{
             output.writeObject(args);
 
             input = new ObjectInputStream(socket.getInputStream());
-            Object o = input.readObject();
-            return o;
+            return input.readObject();
 
-        }catch (Exception e){
-            System.out.println(e);
-        }finally {
-            if(output !=null)output.close();
-            if(input != null)input.close();
-            if(socket != null)socket.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (output != null) output.close();
+            if (input != null) input.close();
+            if (socket != null) socket.close();
         }
         System.out.println("invoke end");
         return null;

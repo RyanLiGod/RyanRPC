@@ -8,6 +8,7 @@ import RPCServer.HelloServiceImpl;
  * @date 2019/07/18
  */
 public class ServerStart {
+
     public static void main(String[] args) {
         new Thread(() -> {
             try {
@@ -15,8 +16,11 @@ public class ServerStart {
                 server.register(HelloService.class, HelloServiceImpl.class);
                 server.start();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }).start();
     }
+
+
+
 }
