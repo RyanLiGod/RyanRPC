@@ -15,13 +15,13 @@ import java.util.HashMap;
  */
 public class Server {
 
-    private static final HashMap<String, Class> serviceRegistry = new HashMap<String, Class>();
+    private static final HashMap<String, Class> serviceRegistry = new HashMap<>();
 
     public void start() throws Exception {
         ServerSocket server = new ServerSocket();
-        try (server) {
-            server.bind(new InetSocketAddress(8088));
-            System.out.println("Server 等待客服端的链接...");
+        server.bind(new InetSocketAddress(8088));
+        System.out.println("Server 等待客服端的链接...");
+        try  {
             while (true) {
                 ServerSocketRunnable serverSocket = new ServerSocketRunnable(server.accept());
                 serverSocket.run();
