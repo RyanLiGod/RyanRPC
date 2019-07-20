@@ -2,3 +2,7 @@
 .vscode
 out
 lib
+.project
+.classpath
+target
+.settings

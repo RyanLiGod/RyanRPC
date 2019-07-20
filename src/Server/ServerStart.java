@@ -1,7 +1,7 @@
-package RemoteServer;
+package Server;
 
-import RPCServer.HelloService;
-import RPCServer.HelloServiceImpl;
+import Service.HelloService;
+import Service.HelloServiceImpl;
 
 /**
  * @author Ryan Li
@@ -20,7 +20,5 @@ public class ServerStart {
             }
         }).start();
     }
-
-
 
 }

@@ -1,4 +1,4 @@
-package RPCServer;
+package Service;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @date 2019/07/18
  */
 public class HelloServiceImpl implements HelloService, Serializable {
-
+    @Override
     public String sayHi(String name) {
         return "Hi " + name;
     }

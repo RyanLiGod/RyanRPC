@@ -1,6 +1,6 @@
 package Client;
 
-import RPCServer.HelloService;
+import Service.HelloService;
 import Proxy.MyInvokeHandler;
 
 import java.lang.reflect.Proxy;

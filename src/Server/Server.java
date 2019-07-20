@@ -1,4 +1,4 @@
-package RemoteServer;
+package Server;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -63,7 +63,7 @@ public class Server {
                 Class serverClass = serviceRegistry.get(className);
                 Method method = serverClass.getMethod(methodName, parameterTypes);
                 Object result = method.invoke(serverClass.getDeclaredConstructor().newInstance(), arguments);
-                // 给client的响应netty-all-4.1.37.Final.jar
+                // 给client的响应
                 System.out.println("Server 回应消息...");
                 objectOutputStream = new ObjectOutputStream(client.getOutputStream());
                 objectOutputStream.writeObject(result);
