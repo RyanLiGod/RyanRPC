@@ -8,8 +8,7 @@ import java.io.Serializable;
  */
 public class HelloServiceImpl implements HelloService, Serializable {
     @Override
-    public String sayHi(String name) {
-        return "Hi " + name;
+    public String sayHello(String name) {
+        return "Hello " + name;
     }
-
 }
