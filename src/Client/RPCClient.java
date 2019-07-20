@@ -46,8 +46,9 @@ public class RPCClient {
         System.out.println("Start connecting...");
     }
 
-    public Response send(Request request) {
-        channel.write(request);
+    public Response send(Request request) throws Exception {
+        this.channel.write(request);
+        handler.getCountDownLatch().await();
         return handler.getResponse();
     }
 

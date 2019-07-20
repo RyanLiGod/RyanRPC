@@ -28,7 +28,7 @@ public class RPCServerHandler extends SimpleChannelHandler {
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) throws Exception {
-        System.out.println("Server message received");
+        System.out.println("Server: Message received");
 
         Request request = (Request) e.getMessage();
         Object result = requestHandler(request);
@@ -41,25 +41,25 @@ public class RPCServerHandler extends SimpleChannelHandler {
 
     @Override
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        System.out.println("Channel connected");
+        System.out.println("Server: Channel connected");
         super.channelConnected(ctx, e);
     }
 
     @Override
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        System.out.println("channel disconnected");
+        System.out.println("Server: channel disconnected");
         super.channelDisconnected(ctx, e);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
-        System.out.println("Exception caught");
+        System.out.println("Server: Exception caught");
         super.exceptionCaught(ctx, e);
     }
 
     @Override
     public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
-        System.out.println("Channel closed");
+        System.out.println("Server: Channel closed");
         super.channelClosed(ctx, e);
     }
 }

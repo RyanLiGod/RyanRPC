@@ -2,6 +2,7 @@ package Proxy;
 
 import Client.RPCClient;
 import Message.Request;
+import Message.Response;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,8 +29,10 @@ public class RPCInvokeHandler implements InvocationHandler {
         RPCClient client = new RPCClient();
         Request request = new Request(target.getName(), method.getName(), method.getParameterTypes(), args);
         try {
+            client.start();
             System.out.println("Client 传递信息中...");
-            client.send(request);
+            Response response = client.send(request);
+            return response.getResult();
         } catch (Exception e) {
             e.printStackTrace();
         }
