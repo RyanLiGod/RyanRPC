@@ -1,6 +1,5 @@
 package Client;
 
-import Message.Request;
 import Message.Response;
 import org.jboss.netty.channel.*;
 

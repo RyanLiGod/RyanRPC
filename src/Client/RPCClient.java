@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
 public class RPCClient {
 
     public Channel channel = null;
-    public RPCClientHandler handler = new RPCClientHandler();
+    private RPCClientHandler handler = new RPCClientHandler();
 
     public void start() {
         ClientBootstrap bootstrap = new ClientBootstrap();
