@@ -25,7 +25,7 @@ public class RPCClient {
     public Channel channel = null;
     private RPCClientHandler handler = new RPCClientHandler();
 
-    public void start() {
+    public void start(String ipAddress, int port) {
         ClientBootstrap bootstrap = new ClientBootstrap();
         ExecutorService boss = Executors.newCachedThreadPool();
         ExecutorService worker = Executors.newCachedThreadPool();
@@ -41,7 +41,7 @@ public class RPCClient {
             return pipeline;
         });
 
-        ChannelFuture connect = bootstrap.connect(new InetSocketAddress("127.0.0.1", 10101));
+        ChannelFuture connect = bootstrap.connect(new InetSocketAddress(ipAddress, port));
         this.channel = connect.getChannel();
         System.out.println("Start connecting...");
     }

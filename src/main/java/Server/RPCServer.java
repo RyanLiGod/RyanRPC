@@ -9,6 +9,7 @@ import org.jboss.netty.handler.codec.serialization.ClassResolvers;
 import org.jboss.netty.handler.codec.serialization.ObjectDecoder;
 import org.jboss.netty.handler.codec.serialization.ObjectEncoder;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,7 +20,7 @@ import java.util.concurrent.Executors;
  */
 public class RPCServer {
 
-    public void start(RPCServerHandler serverHandler) {
+    public void start(RPCServerHandler serverHandler, Integer port) throws Exception {
         // 服务类
         ServerBootstrap bootstrap = new ServerBootstrap();
 
@@ -41,7 +42,7 @@ public class RPCServer {
             return pipeline;
         });
 
-        bootstrap.bind(new InetSocketAddress("127.0.0.1", 10101));
+        bootstrap.bind(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), port));
         System.out.println("Server start!");
     }
 
