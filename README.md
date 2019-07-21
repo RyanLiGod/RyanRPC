@@ -1,5 +1,5 @@
-# MyRPC_V2
+# RyanRPC_V3
 My RPC implementation
 
-使用Netty NIO
+RPC，利用 JDK 反射、动态代理对客户端接口进行增强。使用Netty作网络通讯，zookeeper/etcd作服务注册。
 
