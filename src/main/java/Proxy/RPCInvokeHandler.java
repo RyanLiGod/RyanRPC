@@ -31,7 +31,7 @@ public class RPCInvokeHandler implements InvocationHandler {
             ServiceRegister serviceRegister = new ServiceRegister();
             List<String> serverList = serviceRegister.getService(HelloService.class.getName());
             System.out.println("获取到服务供给者：" + serverList);
-            String[] serverInfo = serverList.get(0).split(",");
+            String[] serverInfo = serverList.get(0).split(":");
             client.start(serverInfo[0], Integer.parseInt(serverInfo[1]));
             System.out.println("Client 传递信息中...");
             Response response = client.send(request);

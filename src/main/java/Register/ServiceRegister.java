@@ -28,7 +28,7 @@ public class ServiceRegister {
         if (!inited) {
             this.initZookeeper();
         }
-        zkClient.create("/" + serviceName + "/" + ipAddress + "," + port, ipAddress.getBytes(),
+        zkClient.create("/" + serviceName + "/" + ipAddress + ":" + port, ipAddress.getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
     }
 
