@@ -23,7 +23,7 @@ public class RPCInvokeHandler implements InvocationHandler {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         System.out.println("invoke before");
         RPCClient client = new RPCClient();
         Request request = new Request(target.getName(), method.getName(), method.getParameterTypes(), args);

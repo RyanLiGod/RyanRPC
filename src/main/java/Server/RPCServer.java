@@ -38,7 +38,7 @@ public class RPCServer {
                     ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())));
             // 下行触发encoder
             pipeline.addLast("encoder", new ObjectEncoder());
-            pipeline.addLast("NettyServerHandler", serverHandler);
+            pipeline.addLast("RPCServerHandler", serverHandler);
             return pipeline;
         });
 

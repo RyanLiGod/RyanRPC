@@ -37,7 +37,7 @@ public class RPCClient {
             pipeline.addLast("decoder", new ObjectDecoder(1024 * 2,
                     ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader())));
             pipeline.addLast("encoder", new ObjectEncoder());
-            pipeline.addLast("NettyServerHandler", handler);
+            pipeline.addLast("RPCClientHandler", handler);
             return pipeline;
         });
 

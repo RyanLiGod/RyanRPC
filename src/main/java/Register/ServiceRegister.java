@@ -16,7 +16,6 @@ public class ServiceRegister {
     private void initZookeeper() {
         try {
             zkClient = new ZooKeeper("127.0.0.1:2181", 2000, (WatchedEvent watchedEvent) -> {
-                System.out.println("receive the event:" + watchedEvent);
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,6 +26,10 @@ public class ServiceRegister {
     public void register(String serviceName, String ipAddress, int port) throws Exception {
         if (!inited) {
             this.initZookeeper();
+        }
+        if (zkClient.exists("/" + serviceName, false) == null) {
+            zkClient.create("/" + serviceName, serviceName.getBytes(),
+                    ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         }
         zkClient.create("/" + serviceName + "/" + ipAddress + ":" + port, ipAddress.getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
