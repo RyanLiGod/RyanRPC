@@ -3,7 +3,7 @@ package Proxy;
 import Client.RPCClient;
 import Message.Request;
 import Message.Response;
-import Register.ServiceRegister;
+import Register.ZKUtil;
 import Service.HelloService;
 
 import java.lang.reflect.InvocationHandler;
@@ -27,17 +27,19 @@ public class RPCInvokeHandler implements InvocationHandler {
         System.out.println("invoke before");
         RPCClient client = new RPCClient();
         Request request = new Request(target.getName(), method.getName(), method.getParameterTypes(), args);
+        ZKUtil zkUtil = new ZKUtil();
+        String server = null;
         try {
-            ServiceRegister serviceRegister = new ServiceRegister();
-            List<String> serverList = serviceRegister.getService(HelloService.class.getName());
-            System.out.println("获取到服务供给者：" + serverList);
-            String[] serverInfo = serverList.get(0).split(":");
+            server = zkUtil.getService(HelloService.class.getName());
+            String[] serverInfo = server.split(":");
             client.start(serverInfo[0], Integer.parseInt(serverInfo[1]));
             System.out.println("Client 传递信息中...");
             Response response = client.send(request);
             return response.getResult();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            zkUtil.releaseService(HelloService.class.getName(), server);
         }
         System.out.println("invoke failed");
         return null;

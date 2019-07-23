@@ -1,6 +1,6 @@
 package Main;
 
-import Register.ServiceRegister;
+import Register.ZKUtil;
 import Server.RPCServer;
 import Server.RPCServerHandler;
 import Service.HelloService;
@@ -17,9 +17,9 @@ public class MainServer {
 
     public static void main(String[] args) throws Exception {
         RPCServerHandler serverHandler = new RPCServerHandler();
-        serverHandler.Register(HelloService.class.getName(), HelloServiceImpl.class);
-        ServiceRegister serviceRegister = new ServiceRegister();
-        serviceRegister.register(HelloService.class.getName(), InetAddress.getLocalHost().getHostAddress(), port);
+        serverHandler.register(HelloService.class.getName(), HelloServiceImpl.class);
+        ZKUtil zkUtil = new ZKUtil();
+        zkUtil.zkRegister(HelloService.class.getName(), InetAddress.getLocalHost().getHostAddress(), port);
         new RPCServer().start(serverHandler, port);
     }
 }

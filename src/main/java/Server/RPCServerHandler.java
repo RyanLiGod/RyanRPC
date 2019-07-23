@@ -1,6 +1,7 @@
 package Server;
 
 import Message.Request;
+import Service.HelloService;
 import org.jboss.netty.channel.*;
 
 import java.lang.reflect.Method;
@@ -14,7 +15,7 @@ public class RPCServerHandler extends SimpleChannelHandler {
 
     private HashMap<String, Class> serviceRegistry = new HashMap<>();
 
-    public void Register(String name, Class c) {
+    public void register(String name, Class c) {
         if (!serviceRegistry.containsKey(name)) {
             serviceRegistry.put(name, c);
         }
