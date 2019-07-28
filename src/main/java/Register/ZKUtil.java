@@ -67,7 +67,7 @@ public class ZKUtil {
             zkClient.setData("/" + serviceName + "/" + selectServer, String.valueOf(min + 1).getBytes(), stat.getVersion());
             System.out.println("获取到服务供给者：" + selectServer);
             System.out.println("当前服务器负载：" + (min + 1));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
