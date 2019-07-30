@@ -30,7 +30,7 @@ public class RPCInvokeHandler implements InvocationHandler {
         ZKUtil zkUtil = new ZKUtil();
         String server = null;
         try {
-            server = zkUtil.getService(HelloService.class.getName());
+            server = zkUtil.getService(target.getName());
             String[] serverInfo = server.split(":");
             client.start(serverInfo[0], Integer.parseInt(serverInfo[1]));
             System.out.println("Client 传递信息中...");
@@ -39,7 +39,7 @@ public class RPCInvokeHandler implements InvocationHandler {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            zkUtil.releaseService(HelloService.class.getName(), server);
+            zkUtil.releaseService(target.getName(), server);
         }
         System.out.println("invoke failed");
         return null;
