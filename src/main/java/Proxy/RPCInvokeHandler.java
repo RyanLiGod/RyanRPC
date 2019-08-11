@@ -4,11 +4,9 @@ import Client.RPCClient;
 import Message.Request;
 import Message.Response;
 import Register.ZKUtil;
-import Service.HelloService;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
-import java.util.List;
 
 /**
  * @author Ryan Li
@@ -24,7 +22,6 @@ public class RPCInvokeHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) {
-        System.out.println("invoke before");
         RPCClient client = new RPCClient();
         Request request = new Request(target.getName(), method.getName(), method.getParameterTypes(), args);
         ZKUtil zkUtil = new ZKUtil();

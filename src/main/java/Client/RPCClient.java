@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
  */
 public class RPCClient {
 
-    public Channel channel = null;
+    private Channel channel = null;
     private RPCClientHandler handler = new RPCClientHandler();
 
     public void start(String ipAddress, int port) {
