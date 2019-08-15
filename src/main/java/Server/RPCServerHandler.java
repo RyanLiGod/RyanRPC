@@ -1,9 +1,13 @@
 package Server;
 
 import Message.Request;
+import Register.ZKUtil;
+import Service.HelloService;
 import org.jboss.netty.channel.*;
 
 import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 
 /**
@@ -14,10 +18,12 @@ public class RPCServerHandler extends SimpleChannelHandler {
 
     private HashMap<String, Class> serviceRegistry = new HashMap<>();
 
-    public void register(String name, Class c) {
+    public void register(String name, Class c, Integer port) throws Exception {
         if (!serviceRegistry.containsKey(name)) {
             serviceRegistry.put(name, c);
         }
+        ZKUtil zkUtil = new ZKUtil();
+        zkUtil.zkRegister(HelloService.class.getName(), InetAddress.getLocalHost().getHostAddress(), port);
     }
 
     private Object requestHandler(Request request) throws Exception {

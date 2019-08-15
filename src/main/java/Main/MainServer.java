@@ -17,9 +17,7 @@ public class MainServer {
 
     public static void main(String[] args) throws Exception {
         RPCServerHandler serverHandler = new RPCServerHandler();
-        serverHandler.register(HelloService.class.getName(), HelloServiceImpl.class);
-        ZKUtil zkUtil = new ZKUtil();
-        zkUtil.zkRegister(HelloService.class.getName(), InetAddress.getLocalHost().getHostAddress(), port);
+        serverHandler.register(HelloService.class.getName(), HelloServiceImpl.class, port);
         new RPCServer().start(serverHandler, port);
     }
 }
