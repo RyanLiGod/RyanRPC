@@ -23,7 +23,7 @@ public class RPCServerHandler extends SimpleChannelHandler {
             serviceRegistry.put(name, c);
         }
         ZKUtil zkUtil = new ZKUtil();
-        zkUtil.zkRegister(c.getName(), InetAddress.getLocalHost().getHostAddress(), port);
+        zkUtil.zkRegister(c.getName().substring(0, c.getName().length() - 4), InetAddress.getLocalHost().getHostAddress(), port);
     }
 
     private Object requestHandler(Request request) throws Exception {
