@@ -2,12 +2,10 @@ package Server;
 
 import Message.Request;
 import Register.ZKUtil;
-import Service.HelloService;
 import org.jboss.netty.channel.*;
 
 import java.lang.reflect.Method;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 
 /**
